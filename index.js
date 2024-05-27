@@ -19,6 +19,20 @@ app.get("/api", function (req, res) {
     res.send(newJSON);
 });
 
+app.get('/api', function (req, res) {
+    connection.query('SELECT 2 AS solution', function (err, rows, fields) {
+         if (err) {
+             res.status(501).send("database query error");
+         } else {
+             console.log('The solution is: ', rows[0].solution);
+             res.send(rows[0].solution.toString());
+         }
+    });
+ });
+
+
+
+
 app.get("/visitors", function (req, res) {
     const json = fs.readFileSync("count.json", "utf-8");
     const obj = JSON.parse(json);
